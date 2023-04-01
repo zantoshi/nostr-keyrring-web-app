@@ -1,0 +1,59 @@
+{% extends "nostr/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+                <h1>Nostr Keyring</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success my-2" role="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+        </div>
+
+        <div class="row my-4">
+            <div class="col-12">
+                <h3>Brands</h3>
+                <p>Get started by creating a brand.</p>
+                <a href="{% url 'brand_create' %}" class="btn btn-outline-primary">Create Brand</a>
+            </div>    
+
+
+
+        </div>
+        <div class="row mt-2">
+            {% comment %} Add Card Loop Here {% endcomment %}
+            {% for brand in brands %}
+            <div class="col-sm-4 mb-3 mb-sm-0">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title mb-4">{{brand.title}}</h5>
+                  <a href="{% url 'brand_update' brand.id %}" class="btn btn-primary">Edit</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        <div class="row my-4">
+            <div class="col">
+                <h3>Posts</h3>
+                <p>Get started by creating a post.</p>
+                <a href="{% url 'publish_post' %}" class="btn btn-primary">Create Post</a>
+            </div>    
+        </div>
+
+        <div class="row my-4">
+            <div class="col">
+                <h3>Blogs</h3>
+                <p>Get started by creating a blog.</p>
+                <a href="{% url 'publish_blog' %}" class="btn btn-primary">Create Blog</a>
+            </div>    
+        </div>
+    </div>
+{% endblock %}
