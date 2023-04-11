@@ -1,0 +1,33 @@
+{% extends "nostr/base.html" %}
+{% block title %}
+Brand Form
+{% endblock %}
+
+{% block content %}
+        
+      <div class="container">
+        <div class="row my-2">
+            <div class="col-sm-12">
+                <h3>Create a Badge Award</h3>
+                <p>In order to issue a badge, you must create a badge definition.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class="my-4">
+
+                    {{ form }}
+                </table>
+
+                <input class="btn btn-outline-primary" type="submit" onclick="window.location='{% url 'index' %}' ; return false;" value="Back">
+                <input class="btn btn-primary" type="submit" value="Submit">
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

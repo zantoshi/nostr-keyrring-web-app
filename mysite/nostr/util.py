@@ -24,6 +24,12 @@ def get_event_kind(type):
         kind = 1
     elif type == "long_form":
         kind = 30023
+    elif type == "badge_definition":
+        kind = 30009
+    elif type == "badge_award":
+        kind = 8
+    elif type == "profile_badge":
+        kind = 30008
     
     return kind
 
@@ -77,6 +83,36 @@ def publish_short_note(private_key, public_key, relay_uri, content, tags):
 def publish_longform_note(private_key, public_key, relay_uri, content, tags):
     ts = create_timestamp()
     kind = get_event_kind("long_form")
+    event_id = create_event_id(public_key, ts, kind, tags, content)
+    sig = create_signature(event_id, private_key)
+    event = {"id":event_id,"pubkey":public_key,"created_at":ts,"kind":kind,"tags": tags,"content":content,"sig":sig}
+    broadcasted_event = broadcast_event(event, relay_uri)
+    event_data = {"event":event, "event_broadcast" : broadcasted_event}
+    return event_data
+
+def publish_badge_definition(private_key, public_key, relay_uri, content, tags):
+    ts = create_timestamp()
+    kind = get_event_kind("badge_definition")
+    event_id = create_event_id(public_key, ts, kind, tags, content)
+    sig = create_signature(event_id, private_key)
+    event = {"id":event_id,"pubkey":public_key,"created_at":ts,"kind":kind,"tags": tags,"content":content,"sig":sig}
+    broadcasted_event = broadcast_event(event, relay_uri)
+    event_data = {"event":event, "event_broadcast" : broadcasted_event}
+    return event_data
+
+def publish_badge_award(private_key, public_key, relay_uri, content, tags):
+    ts = create_timestamp()
+    kind = get_event_kind("badge_award")
+    event_id = create_event_id(public_key, ts, kind, tags, content)
+    sig = create_signature(event_id, private_key)
+    event = {"id":event_id,"pubkey":public_key,"created_at":ts,"kind":kind,"tags": tags,"content":content,"sig":sig}
+    broadcasted_event = broadcast_event(event, relay_uri)
+    event_data = {"event":event, "event_broadcast" : broadcasted_event}
+    return event_data
+
+def publish_profile_badge(private_key, public_key, relay_uri, content, tags):
+    ts = create_timestamp()
+    kind = get_event_kind("profile_badge")
     event_id = create_event_id(public_key, ts, kind, tags, content)
     sig = create_signature(event_id, private_key)
     event = {"id":event_id,"pubkey":public_key,"created_at":ts,"kind":kind,"tags": tags,"content":content,"sig":sig}

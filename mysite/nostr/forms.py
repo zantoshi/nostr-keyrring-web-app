@@ -12,3 +12,15 @@ class BrandForm(ModelForm):
 
 class BlogForm(forms.Form):
     content = MarkdownxFormField()
+
+class BadgeDefinitionForm(forms.Form):
+    unique_name = forms.CharField(max_length=500)
+    name = forms.CharField(max_length=500)
+    description = forms.CharField(max_length=500)
+    image = forms.URLField()
+    thumb = forms.URLField()
+
+class BadgeAwardForm(ModelForm):
+    class Meta:
+        model = BadgeAward
+        fields = ['badge_definition', 'awardee_pubkey']

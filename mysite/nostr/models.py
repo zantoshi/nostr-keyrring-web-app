@@ -17,3 +17,13 @@ class Post(models.Model):
 class Blog(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     nostr_id = models.CharField(max_length=500)
+
+class BadgeDefinition(models.Model):
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    unique_name = models.CharField(max_length=500)
+    nostr_id = models.CharField(max_length=500)
+
+class BadgeAward(models.Model):
+    badge_definition = models.ForeignKey(BadgeDefinition, on_delete=models.CASCADE)
+    nostr_id = models.CharField(max_length=500)
+    awardee_pubkey = models.CharField(max_length=500)
